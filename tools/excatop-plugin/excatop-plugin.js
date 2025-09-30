@@ -45,7 +45,7 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
       }
 
       const catalyzeData = await catalyzeResponse.json();
-      return catalyzeData.html || catalyzeData.content || catalyzeData;
+      return catalyzeData.result?.htmlOutput;
     } catch (error) {
       console.error('Catalyze error:', error);
       throw error;
