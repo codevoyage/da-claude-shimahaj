@@ -178,7 +178,7 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 
       // Step 3: Show success and open DA
       const daUrlPath = targetPath.endsWith('.html') ? targetPath.slice(0, -5) : targetPath;
-      const daUrl = `https://da.live/#${daUrlPath}`;
+      const daUrl = `https://da.live/edit#${daUrlPath}`;
       showStatus('', 'success');
       statusDiv.innerHTML = `
         <div>✅ Content successfully created in DA!</div>
