@@ -1,18 +1,81 @@
 import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 
 (async function init() {
-  const { context, token, actions } = await DA_SDK;
+  const { context, token } = await DA_SDK;
 
   // Get form elements
   const form = document.getElementById('excatop-form');
   const sourceUrlInput = document.getElementById('source-url');
-  const targetPathInput = document.getElementById('target-path');
   const catalyzeBtn = document.getElementById('catalyze-btn');
   const statusDiv = document.getElementById('status');
 
-  // Set default target path from context if available
-  if (context && context.pathname && !targetPathInput.value) {
-    targetPathInput.placeholder = context.pathname;
+  /**
+   * Generate upload path from URL
+   * @param {string} url - Original URL to extract path from
+   * @returns {string} - Upload path based on hostname and URL path
+   */
+  function generateUploadPathFromUrl(url) {
+    try {
+      const urlObj = new URL(url);
+      let { hostname } = urlObj;
+      let { pathname } = urlObj;
+
+      // Remove 'www.' prefix if present
+      hostname = hostname.replace(/^www\./, '');
+
+      // Remove leading slash from pathname
+      pathname = pathname.replace(/^\/+/, '');
+
+      // If pathname is empty or just '/', use 'index.html'
+      if (!pathname || pathname === '') {
+        pathname = 'index.html';
+      } else if (pathname.endsWith('/')) {
+        // If pathname ends with '/', it's a directory - convert to index.html
+        pathname += 'index.html';
+      } else if (!pathname.endsWith('.html')) {
+        // If pathname doesn't end with .html, add it
+        // Check if there's already an extension
+        const lastDot = pathname.lastIndexOf('.');
+        const lastSlash = pathname.lastIndexOf('/');
+
+        // If no extension or extension is before the last slash (directory), add .html
+        if (lastDot === -1 || lastDot < lastSlash) {
+          pathname += '.html';
+        }
+      }
+
+      // Replace dots with hyphens for DA compatibility (except .html extension)
+      // First handle the hostname - replace all dots with hyphens
+      let daCompatibleHostname = hostname.replace(/\./g, '-');
+
+      // Handle pathname - replace dots with hyphens but preserve .html extension
+      let daCompatiblePathname = pathname;
+      if (pathname.endsWith('.html')) {
+        // Remove .html, replace dots, then add .html back
+        const withoutExtension = pathname.slice(0, -5); // Remove '.html'
+        let cleanedPath = withoutExtension.replace(/\./g, '-');
+
+        // Collapse multiple consecutive hyphens and remove trailing hyphens
+        cleanedPath = cleanedPath.replace(/-+/g, '-').replace(/-+$/, '');
+
+        daCompatiblePathname = `${cleanedPath}.html`;
+      } else {
+        // No .html extension, replace all dots
+        daCompatiblePathname = pathname.replace(/\./g, '-');
+
+        // Collapse multiple consecutive hyphens and remove trailing hyphens
+        daCompatiblePathname = daCompatiblePathname.replace(/-+/g, '-').replace(/-+$/, '');
+      }
+
+      // Collapse multiple consecutive hyphens into single hyphens for hostname (DA doesn't like --)
+      daCompatibleHostname = daCompatibleHostname.replace(/-+/g, '-');
+
+      // Combine with prefix and hostname and pathname
+      return `/aemysites/excatop/${daCompatibleHostname}/${daCompatiblePathname}`;
+    } catch (error) {
+      console.warn(`Failed to generate upload path from URL: ${url}`, error);
+      return null;
+    }
   }
 
   // Show status message
@@ -28,31 +91,33 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
     statusDiv.style.display = 'none';
   }
 
-  // Create content in DA
+  // Create content in DA using FormData approach
   async function createContentInDA(html, targetPath) {
     try {
-      // Use DA API to create content
-      // Note: This is a simplified example - the actual DA API endpoints may vary
-      const daApiUrl = 'https://da.live/api/v1/content';
+      // Use DA's admin source API with FormData (based on DA documentation)
+      // Ensure the path ends with .html for documents
+      const fullPath = targetPath.endsWith('.html') ? targetPath : `${targetPath}.html`;
+      const daApiUrl = `https://admin.da.live/source${fullPath}`;
 
-      const response = undefined; /* await fetch(daApiUrl, {
+      // Create HTML blob and FormData as per DA documentation
+      const htmlBlob = new Blob([html], { type: 'text/html' });
+      const formData = new FormData();
+      formData.append('data', htmlBlob);
+
+      const response = await fetch(daApiUrl, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          // Don't set Content-Type - let browser set it for FormData
         },
-        body: JSON.stringify({
-          path: targetPath,
-          content: html,
-          overwrite: true,
-        }),
-      }); */
+        body: formData,
+      });
 
       if (!response.ok) {
         throw new Error(`DA API error: ${response.status} ${response.statusText}`);
       }
 
-      return await response.json();
+      return { success: true, path: fullPath };
     } catch (error) {
       console.error('Error creating content in DA:', error);
       throw error;
@@ -64,7 +129,8 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
     e.preventDefault();
 
     const sourceUrl = sourceUrlInput.value;
-    const targetPath = targetPathInput.value || context?.pathname || '/content/excatop-output';
+    // Generate target path from URL
+    const targetPath = generateUploadPathFromUrl(sourceUrl) || '/aemysites/excatop/excatop-output';
 
     if (!sourceUrl) {
       showStatus('Please enter a source URL', 'error');
@@ -74,38 +140,45 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
     try {
       catalyzeBtn.disabled = true;
       catalyzeBtn.textContent = 'Catalyzing...';
-      showStatus('Processing your request...', 'loading');
+      showStatus(`Processing your request... Target: ${targetPath}`, 'loading');
 
       // Step 1: Call the catalyze endpoint
       showStatus('Fetching content from source URL...', 'loading');
 
-      // Note: Replace this with your actual catalyze endpoint
-      const catalyzeEndpoint = 'https://your-catalyze-service.com/api/catalyze';
+      // Real catalyze endpoint
+      const catalyzeEndpoint = 'https://excatop-fapp.azurewebsites.net/api/map';
 
-      const catalyzeResponse = undefined; /* await fetch(catalyzeEndpoint, {
+      const catalyzeResponse = await fetch(catalyzeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           url: sourceUrl,
+          model: 'claude-sonnet-4',
         }),
-      }); */
+      });
 
       if (!catalyzeResponse.ok) {
         throw new Error(`Catalyze service error: ${catalyzeResponse.status}`);
       }
 
       const catalyzeData = await catalyzeResponse.json();
-      const generatedHtml = catalyzeData.html || catalyzeData.content || catalyzeData;
+      const generatedHtml = catalyzeData.result?.htmlOutput;
+
+      if (!generatedHtml) {
+        showStatus('No HTML output from catalyze service', 'error');
+        return;
+      }
 
       // Step 2: Create content in DA
       showStatus('Creating content in DA...', 'loading');
 
-      const daResult = await createContentInDA(generatedHtml, targetPath);
+      await createContentInDA(generatedHtml, targetPath);
 
       // Step 3: Show success and open DA
-      const daUrl = `https://da.live${targetPath}`;
+      const daUrlPath = targetPath.endsWith('.html') ? targetPath.slice(0, -5) : targetPath;
+      const daUrl = `https://da.live/#${daUrlPath}`;
       showStatus('', 'success');
       statusDiv.innerHTML = `
         <div>✅ Content successfully created in DA!</div>

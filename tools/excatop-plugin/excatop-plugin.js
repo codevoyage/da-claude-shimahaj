@@ -26,18 +26,19 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
   // Catalyze content from URL
   async function catalyzeContent(sourceUrl) {
     try {
-      // Note: Replace this with your actual catalyze endpoint
-      const catalyzeEndpoint = 'https://your-catalyze-service.com/api/catalyze';
+      // Real catalyze endpoint
+      const catalyzeEndpoint = 'https://excatop-fapp.azurewebsites.net/api/map';
 
-      const catalyzeResponse = undefined; /* await fetch(catalyzeEndpoint, {
+      const catalyzeResponse = await fetch(catalyzeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           url: sourceUrl,
+          model: 'claude-sonnet-4',
         }),
-      }); */
+      });
 
       if (!catalyzeResponse.ok) {
         throw new Error(`Catalyze service error: ${catalyzeResponse.status}`);
