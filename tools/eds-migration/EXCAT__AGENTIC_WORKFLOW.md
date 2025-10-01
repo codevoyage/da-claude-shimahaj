@@ -1,7 +1,8 @@
 # Agentic Web Content Processing Workflow
 
 ## Overview
-This workflow transforms web pages into structured content using Adobe Edge Delivery Services (EDS) block library. It processes web content through multiple AI agents to extract, analyze, map, and convert content into various formats.
+This workflow transforms web pages into structured content using Adobe Edge Delivery Services (EDS) block library. It processes web content through multiple AI agents to extract, analyze, map, convert content into various formats and upload to Adobe AEM DA.
+In case you are being asked to migrate multiple page, just execute that workflow in sequence for each URL.
 
 ## Workflow Steps
 
@@ -12,34 +13,28 @@ This workflow transforms web pages into structured content using Adobe Edge Deli
 - Navigate to the target URL using a headless browser (Playwright/Puppeteer)
 - Wait for page to fully load (networkidle2)
 - Scroll through the page to trigger lazy-loaded content
-- Capture screenshot of the full page
+- Take a screenshot of the full page without trying to set a filename for it, just take default full page screenshot
 - Remove all useless DOM elements (script, style, ...)
 - Extract the complete HTML body content
-- Always close the browser at the end
-
-**Output**: 
-- RAW HTML content (unmodified) => content-raw.html
-- Full page screenshot taken by Playwright
+- Keep the browser open in case we need it later
 
 ### 2. Content Analysis Agent
-**Purpose**: Convert HTML into structured JSON representation
+**Purpose**: Convert page state YAML into structured JSON representation
 
 **Actions**:
-- Look at file ./tools/eds-migration/eds-content-zod-mapping.js to get a precise representation of the expected content in an EDS project
-- Analyze the RAW HTML content and the screenshot of the webpage (using AI vision capabilities)
+- Analyze the Page State YAML content and the screenshot of the webpage (using AI vision capabilities)
 - Extract all text content without modification
 - Exclude header and footer elements
 - Preserve exact text content without adding or removing any content
 - Include media URLs for images and videos (including SVGs and videos)
 
-**Output**: Structured JSON representation of page content => content-raw.json
+**Output**: Structured JSON representation of page content, keep it in memory, do not save it to disk
 
 ### 3. EDS Mapping Agent
 **Purpose**: Map the content from the json structure in Markdown format structuring content in tables as described in the block library json structure. Use block descriptions to find the best match and example structures to represent the content in tables like in the examples. Put free content that is not part of content structures as free content not in tables.
 For the format of the tables, use the exact format shown in the block library examples
 
 **Actions**:
-- Have a look at tools/eds-migration/sta-boilerplate-block-library-no-images.json file as it contains a set of EDS blocks you have to use for the mapping. The JSON structure contains description and examples for each block so you better understand how to map the content.
 - Analyze the JSON representation of the webpage and the screenshot against available block types
 - Map content sections to appropriate EDS blocks
 - Ensure proper block hierarchy and relationships
@@ -47,6 +42,7 @@ For the format of the tables, use the exact format shown in the block library ex
 - Generate markdown representation using EDS block syntax
 
 **Important Rules**:
+- file @./tools/eds-migration/sta-boilerplate-block-library-no-images.json contains a set of EDS blocks you have to use for the mapping. The JSON structure contains description and examples for each block so you better understand how to map the content.
 - Use + and - characters for table borders
 - Use | characters for column separators
 - Follow the exact format pattern from the examples in the block library
@@ -64,7 +60,7 @@ For the format of the tables, use the exact format shown in the block library ex
 | Content in second cell                        |
 +-----------------------------------------------+
 
-**Output**: Markdown content using EDS block syntax => content.md 
+**Output**: Markdown content using EDS block syntax => save it to ./content.md (just overwrites if file already exists)
 
 ### 4. HTML Conversion Agent
 **Purpose**: Convert EDS markdown to semantic HTML
@@ -84,11 +80,11 @@ node tools/eds-migration/cli.js convert-html ./content.md --url https://example.
 
 **Output**: Semantic HTML content => content.html
 
-### 5. Document Authoring Upload Agent (Optional)
+### 5. Upload to Document Authoring Agent
 **Purpose**: Upload converted content to Adobe Document Authoring
 
 **Actions**:
-- Generate upload path from original URL
+- Generate upload path from git repository information (organization + repo) and from original URL
 - Upload HTML content to Document Authoring platform
 - Handle authentication and API calls
 - Provide upload confirmation and URL
@@ -100,35 +96,6 @@ node tools/eds-migration/cli.js upload-da ./content.html --owner myorg --repo my
 ```
 
 **Output**: Upload confirmation and URL
-
-### 6. Document Authoring Download Agent (Optional)
-**Purpose**: Download content from Adobe Document Authoring for review or further processing
-
-**Actions**:
-- Fetch content from Document Authoring using bearer token authentication
-- Save content to local file or output to console
-- Support for environment variable or command-line token
-
-**CLI Tool Available**: `tools/eds-migration/cli.js dl-da`
-```bash
-# Download content from DA to console (requires DA_BEARER_TOKEN in .env)
-node tools/eds-migration/cli.js dl-da https://admin.da.live/source/aemysites/excatop/cl-code/stryker-com/ch/en/index.html
-
-# Download and save to file
-node tools/eds-migration/cli.js dl-da https://admin.da.live/source/aemysites/excatop/cl-code/stryker-com/ch/en/index.html --output downloaded.html
-
-# Provide token via command line
-node tools/eds-migration/cli.js dl-da https://admin.da.live/source/aemysites/excatop/cl-code/stryker-com/ch/en/index.html --token YOUR_BEARER_TOKEN --output content.html
-```
-
-**Output**: Downloaded HTML content
-
-**Authentication**:
-- Token can be provided via `--token` flag or `DA_BEARER_TOKEN` environment variable
-- Store your DA bearer token in `.env` file:
-  ```
-  DA_BEARER_TOKEN="your_token_here"
-  ```
 
 ## Key Features
 
@@ -179,6 +146,7 @@ When executing this workflow, you would:
    ```
 
 6. **Generate clean outputs** in the requested formats
+7. **Upload the content to DA**
 
 ### Best Practices for Tool Usage
 
