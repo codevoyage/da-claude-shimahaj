@@ -113,6 +113,112 @@ node tools/eds-migration/cli.js upload-da ./content.html --owner myorg --repo my
 
 **Output**: Updated `./styles/styles.css` file with brand-consistent button styles
 
+### 7. Header Content Extraction Agent
+**Purpose**: Extract header/navigation structure and create nav document for EDS
+
+**Actions**:
+- Analyze the original page header structure using the extracted HTML and screenshot
+- Identify the three main sections of the header:
+  1. **Brand section**: Logo image and/or brand text with link to homepage
+  2. **Main navigation**: Menu items, dropdowns with nested links
+  3. **Tools section**: Action buttons (Subscribe, Search, Login, etc.)
+- Create `nav.md` following the EDS 3-section pattern:
+  - First section (before first `---`): Brand logo/link
+  - Second section (between `---` separators): Navigation menu with nested lists for dropdowns
+  - Third section (after second `---`): Tool buttons
+- Ensure logo uses image markdown with link: `[![Alt Text](image-url)](link-url)`
+- Structure dropdown menus as nested unordered lists
+- Convert to HTML using CLI tool
+- Upload to DA as `nav.html`
+
+**CLI Tools Available**:
+```bash
+# Convert nav markdown to HTML
+node tools/eds-migration/cli.js convert-html ./nav.md --url https://example.com > ./nav.html
+
+# Upload nav to Document Authoring
+node tools/eds-migration/cli.js upload-da ./nav.html --owner myorg --repo myrepo --path nav.html
+```
+
+**Important Notes**:
+- Reference the example at `https://main--aem-boilerplate--adobe.aem.page/nav.md` for structure
+- The header block automatically loads `/nav` by default
+- Preserve the exact link structure from the original navigation
+- Keep dropdown hierarchies clear with proper indentation
+
+**Example nav.md structure**:
+```markdown
+[![Brand](logo.png)](/)
+
+---
+
+- Products
+  - [Product A](#)
+  - [Product B](#)
+- [About](/about)
+- [Contact](/contact)
+
+---
+
+[Subscribe](#)
+```
+
+**Output**: Nav document uploaded to DA at `nav.html`
+
+### 8. Header Styling Agent
+**Purpose**: Extract and apply visual styles from the original header to match brand aesthetics
+
+**Actions**:
+- Use Playwright MCP to navigate to the original URL
+- Extract computed styles from header elements:
+  - Nav container (background, height, padding, positioning)
+  - Brand/logo section (sizing, spacing)
+  - Navigation links (colors, padding, font-size, hover states)
+  - Dropdown menus (background, borders, shadows, positioning)
+  - Tool buttons (if they need special styling beyond global)
+- Update `blocks/header/header.css` with brand-specific styling
+- **Critical**: Handle button auto-styling correctly:
+  - Nav section links may get auto-converted to `.button` class
+  - Add specific CSS to remove button styling from nav section links
+  - Keep global button styles for tools section buttons
+  - Use more specific selectors like `header nav .nav-sections a.button:any-link`
+
+**Important CSS Specificity Rules**:
+```css
+/* Remove button styling from nav section links */
+header nav .nav-sections a.button:any-link {
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-align: left;
+  display: inline;
+  white-space: normal;
+}
+
+/* Tools section buttons use global styles - no override needed */
+```
+
+**Testing**:
+- Verify navigation links don't have button styling (no box-shadow, rounded borders)
+- Verify tools section buttons (Subscribe, etc.) have proper global button styling
+- Check dropdown menus display correctly with proper backgrounds and shadows
+- Test responsive behavior on mobile
+
+**Key Style Areas**:
+1. **Layout**: Transparent/solid background, positioning, spacing
+2. **Brand**: Logo sizing, alignment
+3. **Navigation**: Link colors, hover effects, dropdown positioning
+4. **Dropdowns**: Background colors, shadows, borders, arrow indicators
+5. **Mobile**: Hamburger menu, collapsible navigation
+
+**Output**: Updated `blocks/header/header.css` file with brand-consistent header styles
+
 ## Key Features
 
 ### Multi-Model Support
@@ -164,6 +270,8 @@ When executing this workflow, you would:
 6. **Generate clean outputs** in the requested formats
 7. **Upload the content to DA**
 8. **Extract and apply visual styles** using Playwright MCP to analyze button and UI element styles, then update styles.css
+9. **Extract header/navigation content** and create nav.md with 3-section structure, then upload to DA
+10. **Apply header-specific styles** with proper CSS specificity to handle button auto-styling in navigation
 
 ### Best Practices for Tool Usage
 
