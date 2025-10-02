@@ -91,6 +91,28 @@ node tools/eds-migration/cli.js upload-da ./content.html --owner myorg --repo my
 
 **Output**: Upload confirmation and URL
 
+### 6. Style Analysis Agent
+**Purpose**: Extract and analyze visual styles from the original webpage to replicate in EDS
+
+**Actions**:
+- Use Playwright MCP to navigate to the original URL
+- Identify key UI elements (buttons, links, headings, etc.)
+- Use `mcp__playwright__browser_evaluate` to extract computed styles from primary elements
+- Focus on button styles as they are critical for brand consistency:
+  - Extract computed styles for primary buttons (padding, colors, borders, shadows, typography, transitions)
+  - Extract styles for secondary/variant buttons if present
+  - Document hover and focus states
+- Update `./styles/styles.css` with the extracted styles
+- Maintain EDS CSS structure while applying brand-specific styling
+
+**Important Notes**:
+- Look for distinctive visual features like box-shadows, border-radius, color schemes
+- Pay attention to transitions and animations
+- Preserve the existing EDS structure in styles.css while updating values
+- Test button variants (primary, secondary, disabled states)
+
+**Output**: Updated `./styles/styles.css` file with brand-consistent button styles
+
 ## Key Features
 
 ### Multi-Model Support
@@ -119,11 +141,11 @@ node tools/eds-migration/cli.js upload-da ./content.html --owner myorg --repo my
 
 When executing this workflow, you would:
 
-1. **Use web scraping tools** (like Playwright) to extract HTML and screenshots
+1. **Use web scraping tools** to extract HTML and screenshots
 2. **Apply AI vision capabilities** to analyze both text and visual content
 3. **Reference the EDS block library** to understand available block types
 4. **Map content systematically** to appropriate EDS blocks
-5. **Use CLI tools for final processing**:
+5. **Use CLI tools for content processing**:
 
    ```bash
    # Fix any table formatting issues
@@ -141,6 +163,7 @@ When executing this workflow, you would:
 
 6. **Generate clean outputs** in the requested formats
 7. **Upload the content to DA**
+8. **Extract and apply visual styles** using Playwright MCP to analyze button and UI element styles, then update styles.css
 
 ### Best Practices for Tool Usage
 
