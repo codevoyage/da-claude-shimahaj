@@ -34,7 +34,7 @@ const commands = {
 
       console.log(result.htmlContent);
       writeFileSync('content.html', result.htmlContent);
-    }
+    },
   },
 
   'upload-da': {
@@ -42,7 +42,9 @@ const commands = {
     usage: 'upload-da <html-file> --owner <owner> --repo <repo> [--path <path>] [--prefix <prefix>] [--url <original-url>]',
     handler: async (args) => {
       const htmlFile = args._[1];
-      const { owner, repo, path, prefix, url } = args;
+      const {
+        owner, repo, path, prefix, url,
+      } = args;
 
       if (!htmlFile || !owner || !repo) {
         throw new Error('HTML file, owner, and repo are required');
@@ -56,7 +58,7 @@ const commands = {
         daPath: path,
         daPrefix: prefix,
         htmlContent,
-        url
+        url,
       };
 
       const result = await uploadToDa(state);
@@ -67,7 +69,7 @@ const commands = {
       }
 
       console.log('Upload successful:', result.daUploadUrl);
-    }
+    },
   },
 
   'fix-tables': {
@@ -83,7 +85,7 @@ const commands = {
       const markdown = readFileSync(markdownFile, 'utf-8');
       const fixed = fixGridTableFormatting(markdown);
       console.log(fixed);
-    }
+    },
   },
 
   'process-urls': {
@@ -108,7 +110,7 @@ const commands = {
       }
 
       console.log(processed);
-    }
+    },
   },
 
   'dl-da': {
@@ -116,7 +118,7 @@ const commands = {
     usage: 'dl-da <da-url> [--output <file>] [--token <bearer-token>]',
     handler: async (args) => {
       const daUrl = args._[1];
-      const output = args.output;
+      const { output } = args;
       const token = args.token || process.env.DA_BEARER_TOKEN;
 
       if (!daUrl) {
@@ -131,9 +133,9 @@ const commands = {
 
       const response = await fetch(daUrl, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json'
-        }
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -150,8 +152,58 @@ const commands = {
       }
 
       console.log(`Download successful from: ${daUrl}`);
-    }
-  }
+    },
+  },
+
+  preview: {
+    description: 'Trigger preview build for content in AEM/EDS',
+    usage: 'preview --org <org> --site <site> --path <path> [--ref <ref>] [--token <bearer-token>]',
+    handler: async (args) => {
+      const {
+        org, site, path, ref = 'main',
+      } = args;
+      const token = args.token || process.env.DA_BEARER_TOKEN;
+
+      if (!org || !site || !path) {
+        throw new Error('Organization, site, and path are required');
+      }
+
+      if (!token) {
+        throw new Error('Bearer token required. Provide via --token or DA_BEARER_TOKEN env var');
+      }
+
+      // Ensure path doesn't start with slash for the API
+      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+      const previewApiUrl = `https://admin.hlx.page/preview/${org}/${site}/${ref}/${cleanPath}`;
+
+      console.log(`Triggering preview build: ${previewApiUrl}`);
+
+      const response = await fetch(previewApiUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Preview build failed: ${response.status} ${response.statusText}${errorText ? ` - ${errorText}` : ''}`);
+      }
+
+      const result = await response.text();
+      console.log('Preview build triggered successfully');
+
+      // Generate preview URL
+      const pathWithoutHtml = cleanPath.replace(/\.html$/, '');
+      const previewUrl = `https://${ref}--${site}--${org}.aem.page/${pathWithoutHtml}`;
+
+      console.log(`Preview URL: ${previewUrl}`);
+
+      if (result) {
+        console.log('API Response:', result);
+      }
+    },
+  },
 };
 
 function parseArgs(argv) {

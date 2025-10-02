@@ -11,7 +11,7 @@ At the start of each conversation, read the following files to understand the pr
 - @./tools/eds-migration/EXCAT__AEM_DA.md
 - @./tools/eds-migration/EXCAT__AGENTIC_WORKFLOW.md
 - @./tools/eds-migration/sta-boilerplate-block-library-no-images.json
-
+- @./tools/eds-migration/EXCAT__AEM_HINTS.md
 
 
 ## Global Rules
