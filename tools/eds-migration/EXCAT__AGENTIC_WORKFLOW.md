@@ -10,13 +10,7 @@ In case you are being asked to migrate multiple page, just execute that workflow
 **Purpose**: Extract HTML content and visual context from web pages. Do not try to do any analysis on the content for now, you just need to extract the HTML.
 
 **Actions**:
-- Navigate to the target URL using a headless browser (Playwright/Puppeteer)
-- Wait for page to fully load (networkidle2)
-- Scroll through the page to trigger lazy-loaded content
-- Take a screenshot of the full page without trying to set a filename for it, just take default full page screenshot
-- Remove all useless DOM elements (script, style, ...)
-- Extract the complete HTML body content
-- Keep the browser open in case we need it later
+- Get the body HTML and a screenshot of the full page
 
 ### 2. Content Analysis Agent
 **Purpose**: Convert page state YAML into structured JSON representation
