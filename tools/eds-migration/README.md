@@ -1,126 +1,147 @@
-# Excatop Agentic Tools
+# EDS Migration Tools & Documentation
 
-A collection of JavaScript tools for the agentic workflow that handles markdown to HTML conversion and Adobe Document Authoring uploads.
+A comprehensive toolkit for migrating websites to Adobe Edge Delivery Services (EDS) and managing EDS projects.
 
-## Installation
+## Overview
+
+This directory contains documentation, configuration files, CLI tools, and helper scripts for:
+- Migrating web content to EDS
+- Understanding EDS development patterns
+- Troubleshooting common issues
+- Managing blocks and design tokens
+- Interacting with Adobe Document Authoring (DA)
+
+## Directory Structure
+
+```
+tools/eds-migration/
+├── README.md                  # This file
+├── docs/                      # Documentation files
+├── config/                    # Configuration and reference files
+└── helpers/                   # Helper scripts
+```
+
+### Documentation (`docs/`)
+
+Core documentation for EDS development and migration:
+
+| File | Purpose |
+|------|---------|
+| **EXCAT__AEM_EDS.md** | EDS development best practices, project structure, and coding guidelines |
+| **EXCAT__AEM_DA.md** | Document Authoring API interactions and CLI tool usage |
+| **EXCAT__AGENTIC_WORKFLOW.md** | Step-by-step web content migration workflow |
+| **EXCAT__AUTOMATED_BLOCK_GENERATION.md** | Block generation from web pages with visual analysis |
+| **EXCAT__DEBUGGING.md** | Systematic debugging approaches and CLI commands |
+| **EXCAT__DESIGN_TOKENS.md** | Design tokens reference and adaptation guide |
+| **EXCAT__IMAGE_TROUBLESHOOTING.md** | Image handling issues and solutions |
+| **NAVIGATION.md** | Navigation setup and link styling troubleshooting |
+
+### Configuration (`config/`)
+
+Reference materials and configuration files:
+
+| File | Purpose |
+|------|---------|
+| **sta-boilerplate-block-library-no-images.json** | EDS block library with descriptions and examples |
+| **block-showcase.md** | Reusable template with markdown examples for all blocks |
+| **design-tokens-visual-reference.html** | Visual mockup of all design tokens (open in browser) |
+
+### Helpers (`helpers/`)
+
+Utility scripts for productivity:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| **add-block.sh** | Download blocks from Adobe repositories | `./helpers/add-block.sh <blockname> [boilerplate\|collection]` |
+
+## Quick Start
+
+### For Content Migration
+
+1. **Read the workflow**: Start with `docs/EXCAT__AGENTIC_WORKFLOW.md`
+2. **Use CLI tools**: See `docs/EXCAT__AEM_DA.md` for command reference
+3. **Reference blocks**: Check `config/block-showcase.md` for markdown syntax
+
+### For EDS Development
+
+1. **Project setup**: Follow `docs/EXCAT__AEM_EDS.md`
+2. **Design tokens**: Adapt your design system using `docs/EXCAT__DESIGN_TOKENS.md`
+3. **Visual reference**: Open `config/design-tokens-visual-reference.html` in browser
+
+### For Troubleshooting
+
+1. **General debugging**: See `docs/EXCAT__DEBUGGING.md`
+2. **Image issues**: Check `docs/EXCAT__IMAGE_TROUBLESHOOTING.md`
+3. **Navigation problems**: Refer to `docs/NAVIGATION.md`
+
+## Common Tasks
+
+### Install a Block from Adobe Repository
 
 ```bash
-cd tools/excatop/tools
-npm install
+# Install from boilerplate (default)
+./helpers/add-block.sh quote
+
+# Install from block collection
+./helpers/add-block.sh breadcrumbs collection
 ```
 
-## Environment Setup
-
-The tools automatically load configuration from a `.env` file. Create one with your Adobe DA bearer token:
+### View Design Tokens
 
 ```bash
-DA_BEARER_TOKEN=your_bearer_token_here
+# Open visual reference in browser
+open -a "Google Chrome" config/design-tokens-visual-reference.html
 ```
 
-This token is automatically used by the DA upload commands.
+### Generate Block from Web Page
 
-## Available Commands
+Follow the automated workflow in `docs/EXCAT__AUTOMATED_BLOCK_GENERATION.md`:
+1. Visual layout analysis (count items per row!)
+2. Screenshot capture
+3. Block implementation with proper CSS
+4. Test-verify-refine loop
 
-### Convert Markdown to HTML
-Convert markdown to HTML using Adobe Edge Delivery Services pipeline:
+## Integration with CLAUDE.md
 
-```bash
-# Direct CLI usage
-node cli.js convert-html input.md --url https://example.com
+This toolkit is designed to work with Claude Code. The root `CLAUDE.md` file references these documents as startup files, providing context for AI-assisted development.
 
-# Using npm script
-npm run convert-html input.md -- --url https://example.com
-```
+**Key integration points:**
+- Workflow automation for content migration
+- Block generation and customization
+- Design system adaptation
+- Troubleshooting and debugging
 
-### Upload to Document Authoring
-Upload HTML content to Adobe Document Authoring:
+## Documentation Conventions
 
-```bash
-# Direct CLI usage
-node cli.js upload-da content.html --owner myorg --repo myrepo --path pages/my-page.html
+### File Naming
 
-# With prefix and original URL
-node cli.js upload-da content.html --owner myorg --repo myrepo --prefix content --url https://example.com/original
+- **EXCAT__** prefix: Core documentation files
+- **Uppercase**: Major reference documents
+- **lowercase**: Helper files and examples
 
-# Using npm script
-npm run upload-da content.html -- --owner myorg --repo myrepo
-```
+### When to Reference
 
-### Fix Table Formatting
-Fix grid table formatting in markdown files:
+- **Before migration**: Read workflow and DA interaction docs
+- **During development**: Reference EDS guidelines and design tokens
+- **When blocked**: Use debugging and troubleshooting guides
+- **For examples**: Check block showcase and visual references
 
-```bash
-# Direct CLI usage
-node cli.js fix-tables input.md
+## Support and Resources
 
-# Using npm script
-npm run fix-tables input.md
-```
+- [AEM Edge Delivery Documentation](https://www.aem.live/docs/)
+- [Developer Tutorial](https://www.aem.live/developer/tutorial)
+- [Adobe AEM Boilerplate](https://github.com/adobe/aem-boilerplate)
+- [Adobe Block Collection](https://github.com/adobe/aem-block-collection)
 
-### Process URLs
-Convert relative URLs to absolute URLs in HTML or markdown:
+## Contributing
 
-```bash
-# Process HTML file
-node cli.js process-urls content.html --base-url https://example.com --format html
+When adding new documentation:
+1. Place guides in `docs/`
+2. Place reference materials in `config/`
+3. Place scripts in `helpers/`
+4. Update this README with new entries
+5. Update `CLAUDE.md` if files should be auto-loaded
 
-# Process markdown file
-node cli.js process-urls content.md --base-url https://example.com --format markdown
+## License
 
-# Using npm script
-npm run process-urls content.html -- --base-url https://example.com --format html
-```
-
-### Help
-Display available commands and usage:
-
-```bash
-node cli.js help
-# or
-npm run help
-```
-
-## Tool Functions
-
-### HTML Conversion Agent (`html-conversion-agent.js`)
-- `convertToHtml(state)` - Converts markdown to HTML with URL processing
-- Uses Adobe Helix HTML pipeline for EDS-compatible output
-
-### DA Upload Agent (`da-upload-agent.js`)
-- `uploadToDa(state)` - Uploads HTML to Adobe Document Authoring
-- `generateUploadPathFromUrl(url)` - Generates DA-compatible paths from URLs
-
-### Table Formatting (`utils/table-formatting.js`)
-- `fixGridTableFormatting(markdown)` - Fixes grid table column alignment
-
-### URL Processor (`utils/url-processor.js`)
-- `makeUrlsAbsolute(html, baseUrl)` - Converts relative URLs to absolute in HTML
-- `makeMarkdownUrlsAbsolute(markdown, baseUrl)` - Converts relative URLs in markdown
-- `extractDomain(url)` - Extracts domain from URL
-
-## Usage in Agentic Workflows
-
-These tools can be called from Claude Code using the Bash tool:
-
-```bash
-# Example workflow step
-cd tools/excatop/tools && node cli.js convert-html ../../content.md --url https://example.com > ../../output.html
-```
-
-## State Object Format
-
-When using the functions directly, they expect a state object with these properties:
-
-```javascript
-const state = {
-  edsMapping: 'markdown content',           // For HTML conversion
-  url: 'https://example.com',              // Base URL for processing
-  uploadToDa: true,                        // Enable DA upload
-  daOwner: 'organization',                 // DA repository owner
-  daRepo: 'repository',                    // DA repository name
-  daPath: 'pages/my-page.html',           // Upload path (optional)
-  daPrefix: 'content',                     // Path prefix (optional)
-  htmlContent: '<html>...</html>',         // HTML content to upload
-  errors: []                               // Error array
-};
-```
+Part of the Adobe Experience Manager Edge Delivery Services ecosystem.

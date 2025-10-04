@@ -80,19 +80,45 @@ The initial content sturcture is important because it impacts how the author wil
 
 The block javascript should export a default function which is called to perform the block decoration:
 
-```
+```javascript
 /**
  * loads and decorates the block
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
-  // 1. Load dependencies
+  // 1. Load dependencies (if needed)
   // 2. Extract configuration, if applicable
   // 3. Transform DOM
-  // 4. Add event listeners
-  // 5. Set loaded status
+  // 4. Process images (if block contains images)
+  // 5. Add event listeners
+  // 6. Set loaded status
 }
 ```
+
+**Important:** If your block contains images, you must import and use `createOptimizedPicture` from `aem.js`:
+
+```javascript
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
+export default function decorate(block) {
+  // 1. Transform DOM structure first
+  // ... your DOM manipulation ...
+
+  // 2. Process images AFTER DOM restructuring
+  block.querySelectorAll('picture > img').forEach((img) => {
+    const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(newPicture);
+  });
+}
+```
+
+**Why this matters:**
+- Document Authoring wraps images in `<picture>` elements
+- `createOptimizedPicture` creates responsive images with WebP optimization
+- Processing must happen AFTER DOM restructuring
+- Skipping this step can cause images to show as "about:error"
+
+**For detailed image handling:** See [EXCAT__IMAGE_TROUBLESHOOTING.md](./tools/eds-migration/EXCAT__IMAGE_TROUBLESHOOTING.md)
 
 Use `curl` and `console.log` to inspect the HTML delivered by the backend and the DOM nodes to be decorated before making assumptions. Remember that authors may omit or add fields to a block, so your code must handle this gracefully.
 

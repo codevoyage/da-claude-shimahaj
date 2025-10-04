@@ -81,46 +81,6 @@ When using `--url` parameter, the tool automatically generates DA-compatible pat
    - `https://subdomain.example.com/path/to/page/` → `subdomain-example-com/path/to/page/index.html`
    - `https://example.com/page.html` → `example-com/page.html`
 
-### Trigger Preview Build
-
-**Command**: `preview`
-
-Triggers a preview build for content in AEM/EDS after uploading or modifying content in DA. This is essential for making content immediately available for review and testing.
-
-#### Basic Usage
-
-```bash
-node tools/eds-migration/cli.js preview --org <org> --site <site> --path <path>
-```
-
-#### Parameters
-
-- `--org` (required): Organization/owner (e.g., `aemysites`)
-- `--site` (required): Site/repository name (e.g., `excatop`)
-- `--path` (required): Path to content *without extension* (e.g., `domain-com/page`)
-- `--ref` (optional): Branch reference (defaults to `main`)
-- `--token` (optional): Bearer token (defaults to `DA_BEARER_TOKEN` env var)
-
-#### Examples
-
-```bash
-# Trigger preview for a specific page
-node tools/eds-migration/cli.js preview --org aemysites --site excatop --path "example-com/index"
-
-# Preview with custom branch
-node tools/eds-migration/cli.js preview --org aemysites --site excatop --path "example-com/page" --ref develop
-
-# Preview with explicit token
-node tools/eds-migration/cli.js preview --org aemysites --site excatop --path "example-com/article" --token YOUR_BEARER_TOKEN
-```
-
-#### Use Cases
-
-1. **Immediate Verification**: Preview content immediately after upload
-2. **Content Testing**: Verify content renders correctly in the preview environment
-3. **Workflow Automation**: Integrate into CI/CD pipelines for automatic preview generation
-4. **Quality Assurance**: Ensure content is accessible before sharing with stakeholders
-
 ### Download HTML from Document Authoring
 
 **Command**: `dl-da`
@@ -192,31 +152,10 @@ The downloaded content is returned in HTML format with:
 
 ### Modify DA Document
 
-If you are being instructed to modify DA content, you need to have the HTML content locally so you can modify it and then automatically upload it back to DA. **After every modification, you must trigger a preview build to make the changes immediately available.**
+If you are being instructed to modify DA content, you need to have the HTML content locally so you can modify it and then automatically upload it back to DA. This should be seamless to the user.
 
-#### Complete Modify Workflow
-
-1. **Download**: If you don't have the HTML content locally, download it first from DA and save the HTML locally
-2. **Modify**: Make the requested changes to the HTML content
-3. **Upload**: Automatically upload the modified content back to DA
-4. **Preview**: **Always trigger a preview build after upload** ⭐ **CRITICAL STEP**
-
-#### Example Modify Workflow
-
-```bash
-# 1. Download existing content
-node tools/eds-migration/cli.js dl-da https://admin.da.live/source/myorg/myrepo/pages/example-com/article.html --output current-content.html
-
-# 2. (Modify content locally as needed)
-
-# 3. Upload modified content
-node tools/eds-migration/cli.js upload-da current-content.html --owner myorg --repo myrepo --path pages/example-com/article.html
-
-# 4. ALWAYS trigger preview after upload
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path pages/example-com/article.html
-```
-
-**Note**: The preview step is essential - without it, changes won't be visible in the live environment.
+- If you don't have the HTML content locally, download it first from DA and save the HTML locally.
+- After every modification you automatically upload the modified content back to DA.
 
 
 
@@ -236,23 +175,15 @@ node tools/eds-migration/cli.js convert-html fixed-content.md --url https://exam
 
 # 4. Upload to Document Authoring
 node tools/eds-migration/cli.js upload-da content.html --owner myorg --repo myrepo --url https://example.com
-
-# 5. ALWAYS trigger preview after upload ⭐ CRITICAL
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path example-com/index.html
 ```
 
 ### Batch Upload with Prefixes
 
 ```bash
-# Upload multiple pages with content prefix (ALWAYS include preview after each upload)
+# Upload multiple pages with content prefix
 node tools/eds-migration/cli.js upload-da page1.html --owner myorg --repo myrepo --prefix content --url https://example.com/page1
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path content/example-com/page1.html
-
 node tools/eds-migration/cli.js upload-da page2.html --owner myorg --repo myrepo --prefix content --url https://example.com/page2
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path content/example-com/page2.html
-
 node tools/eds-migration/cli.js upload-da page3.html --owner myorg --repo myrepo --prefix content --url https://example.com/page3
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path content/example-com/page3.html
 ```
 
 ### Upload and Verify Workflow
@@ -261,17 +192,12 @@ node tools/eds-migration/cli.js preview --org myorg --site myrepo --path content
 # 1. Upload content to DA
 node tools/eds-migration/cli.js upload-da content.html --owner myorg --repo myrepo --prefix pages --url https://example.com/article
 
-# 2. IMMEDIATELY trigger preview after upload ⭐ CRITICAL
-node tools/eds-migration/cli.js preview --org myorg --site myrepo --path pages/example-com/article.html
-
-# 3. Download to verify upload was successful (optional)
+# 2. Download to verify upload was successful
 node tools/eds-migration/cli.js dl-da https://admin.da.live/source/myorg/myrepo/pages/example-com/article.html --output verified.html
 
-# 4. Compare uploaded content with original (optional)
+# 3. Compare uploaded content with original
 diff content.html verified.html
 ```
-
-**Note**: The preview step (step 2) is mandatory and makes content immediately available for review at the live URL.
 
 ### Download Workflow Examples
 
@@ -390,40 +316,24 @@ https://admin.da.live/source/{owner}/{repo}/{path}
 
 ## Integration with Claude Code
 
-When using these tools with Claude Code, follow these patterns and **ALWAYS include preview after uploads**:
+When using these tools with Claude Code, follow these patterns:
 
 ```bash
-# Always use absolute paths for upload + preview workflow
+# Always use absolute paths for upload
 node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js upload-da /path/to/content.html --owner myorg --repo myrepo
-node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js preview --org myorg --site myrepo --path content.html
 
 # Download with absolute path for output
 node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js dl-da https://admin.da.live/source/myorg/myrepo/pages/content.html --output /path/to/downloaded.html
 
-# Complete workflow: migrate, upload, preview, verify
+# Complete workflow: migrate, upload, verify
 # 1. Convert markdown to HTML
 node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js convert-html /path/to/content.md --url https://example.com
 
 # 2. Upload to DA
 node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js upload-da /path/to/content.html --owner myorg --repo myrepo --prefix pages --url https://example.com/page
 
-# 3. IMMEDIATELY trigger preview ⭐ CRITICAL STEP
-node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js preview --org myorg --site myrepo --path pages/example-com/page.html
-
-# 4. Download and verify (optional)
+# 3. Download and verify
 node /Users/catalan/repos/franklin/aemysites/excatop/tools/eds-migration/cli.js dl-da https://admin.da.live/source/myorg/myrepo/pages/example-com/page.html --output /path/to/verified.html
-```
-
-### Critical Workflow Rule
-
-**🚨 MANDATORY: Every upload MUST be followed by a preview command**
-
-```bash
-# ✅ CORRECT: Upload followed by preview
-upload-da → preview
-
-# ❌ WRONG: Upload without preview
-upload-da only (content won't be live)
 ```
 
 ## Troubleshooting
