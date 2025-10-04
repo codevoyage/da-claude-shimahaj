@@ -19,6 +19,14 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
+  /* button colors - extracted from WKND Trendsetters */
+  --button-text-color: #000;
+  --button-bg-color: transparent;
+  --button-border-color: #000;
+  --button-shadow-color: rgba(244, 254, 139, 0.5);
+  --button-hover-bg-color: rgba(244, 254, 139, 0.1);
+  --button-focus-color: #000;
+
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -166,49 +174,89 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
-a.button:any-link,
-button {
+/* 
+ * Button Styles
+ * Source: https://wknd-trendsetters.webflow.io/
+ * Extracted: 2025-01-05
+ * 
+ * Variants:
+ * - .button (primary) - Yellow shadow accent with black inset border
+ * - .button.secondary - Black inset border only, no shadow
+ * 
+ * States: default, hover, active, focus, disabled
+ */
+
+main .button:any-link,
+main button {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  padding: 16px 24px;
   font-family: var(--body-font-family);
+  font-size: 16px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  border: 0 solid transparent;
+  border-radius: 1600px;
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 4px 4px 0 0;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s;
 }
 
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
+/* Hover state - enhanced shadow and subtle background */
+main .button:hover,
+main .button:focus,
+main button:hover,
+main button:focus {
+  background-color: var(--button-hover-bg-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 7px 7px 0 0;
   cursor: pointer;
 }
 
-button:disabled,
-button:disabled:hover {
-  background-color: var(--light-color);
-  cursor: unset;
+/* Focus state for accessibility */
+main .button:focus-visible,
+main button:focus-visible {
+  outline: 2px solid var(--button-focus-color);
+  outline-offset: 2px;
 }
 
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+/* Active state */
+main .button:active,
+main button:active {
+  transform: translateY(1px);
+}
+
+/* Disabled state */
+main button:disabled,
+main button:disabled:hover {
+  background-color: var(--light-color);
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+}
+
+/* Secondary button variant - border only, no shadow */
+main .button.secondary,
+main button.secondary {
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+}
+
+main .button.secondary:hover,
+main .button.secondary:focus,
+main button.secondary:hover,
+main button.secondary:focus {
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
 }
 
 main img {
