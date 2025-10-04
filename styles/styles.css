@@ -19,13 +19,6 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
-  /* button colors - WKND Trendsetters inspired */
-  --button-text-color: #000;
-  --button-bg-color: transparent;
-  --button-border-color: #000;
-  --button-shadow-color: rgba(244, 254, 139, 0.5); /* Yellow accent shadow */
-  --button-hover-bg-color: rgba(244, 254, 139, 0.1); /* Subtle yellow tint on hover */
-
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -173,100 +166,49 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons - WKND Trendsetters Style */
-/* Primary button: pill-shaped with yellow shadow effect */
+/* buttons */
 a.button:any-link,
 button {
-  /* Layout */
   box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   max-width: 100%;
-  
-  /* Spacing */
   margin: 12px 0;
-  padding: 16px 24px;
-  
-  /* Border & Shape */
-  border: 0;
-  border-radius: 1600px; /* Pill shape */
-  
-  /* Typography */
+  border: 2px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.5em 1.2em;
   font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.2;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  
-  /* Colors */
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  
-  /* Shadow Effect - black inset border + yellow offset shadow */
-  box-shadow: 
-    rgb(0, 0, 0) 0 0 0 2px inset,
-    var(--button-shadow-color) 4px 4px 0 0;
-  
-  /* Transition */
-  transition: 
-    border-color 0.2s,
-    color 0.2s,
-    background-color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1),
-    box-shadow 0.2s;
-  
-  /* Behavior */
+  background-color: var(--link-color);
+  color: var(--background-color);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Primary button hover state */
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--button-hover-bg-color);
-  
-  /* Increase shadow offset on hover for depth effect */
-  box-shadow: 
-    rgb(0, 0, 0) 0 0 0 2px inset,
-    var(--button-shadow-color) 7px 7px 0 0;
-  
+  background-color: var(--link-hover-color);
   cursor: pointer;
-  text-decoration: none;
 }
 
-/* Disabled button state */
 button:disabled,
 button:disabled:hover {
   background-color: var(--light-color);
-  box-shadow: none;
-  cursor: not-allowed;
-  opacity: 0.5;
+  cursor: unset;
 }
 
-/* Secondary button - no yellow shadow, just black border */
 a.button.secondary,
 button.secondary {
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  
-  /* Only black inset border, no yellow shadow */
-  box-shadow: rgb(0, 0, 0) 0 0 0 2px inset;
-}
-
-/* Secondary button hover - no shadow offset change */
-a.button.secondary:hover,
-a.button.secondary:focus,
-button.secondary:hover,
-button.secondary:focus {
-  background-color: var(--button-hover-bg-color);
-  
-  /* Shadow stays the same on hover */
-  box-shadow: rgb(0, 0, 0) 0 0 0 2px inset;
+  background-color: unset;
+  border: 2px solid currentcolor;
+  color: var(--text-color);
 }
 
 main img {
