@@ -18,6 +18,10 @@
   --text-color: #131313;
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
+  
+  /* button colors - from WKND Trendsetters */
+  --button-primary-shadow: rgba(244, 254, 139, 0.5);
+  --button-border-color: rgb(0, 0, 0);
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -166,49 +170,69 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
+/* buttons - Updated from WKND Trendsetters design */
 a.button:any-link,
 button {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 0;
+  border-radius: 1600px; /* Pill-shaped buttons */
+  padding: 16px 24px;
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: transparent;
+  color: var(--text-color);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-primary-shadow) 4px 4px 0 0;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s;
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--text-color);
+  color: var(--background-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-primary-shadow) 6px 6px 0 0;
+  text-decoration: none;
   cursor: pointer;
 }
 
 button:disabled,
 button:disabled:hover {
   background-color: var(--light-color);
-  cursor: unset;
+  color: var(--dark-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+  cursor: not-allowed;
 }
 
+/* Secondary button style - outline only */
 a.button.secondary,
 button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
+  background-color: transparent;
   color: var(--text-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+}
+
+a.button.secondary:hover,
+a.button.secondary:focus,
+button.secondary:hover,
+button.secondary:focus {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
 }
 
 main img {
