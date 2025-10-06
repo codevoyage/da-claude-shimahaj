@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Excatop - Library Plugin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="data:,">
+    <!-- Import DA App SDK -->
+    <script src="https://da.live/nx/utils/sdk.js" type="module"></script>
+    <!-- Project Plugin Logic -->
+    <script src="/tools/excatop-plugin/excatop-plugin.js" type="module"></script>
+    <style>
+      body {
+        font-family: adobe-clean, "Trebuchet MS", sans-serif;
+        margin: 0;
+        padding: 15px;
+        background-color: #fafafa;
+      }
+      .plugin-container {
+        max-width: 300px;
+        background: white;
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      }
+      h2 {
+        color: #333;
+        margin: 0 0 20px 0;
+        text-align: center;
+        font-size: 18px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+        font-size: 13px;
+      }
+      input[type="url"] {
+        width: 100%;
+        padding: 8px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+      input[type="url"]:focus {
+        border-color: #0066cc;
+        outline: none;
+      }
+      .button-group {
+        display: flex;
+        gap: 10px;
+      }
+      .catalyze-btn {
+        background-color: #0066cc;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        flex: 1;
+        transition: background-color 0.3s;
+      }
+      .catalyze-btn:hover {
+        background-color: #0052a3;
+      }
+      .catalyze-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      .catalyze-close-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        flex: 1;
+        transition: background-color 0.3s;
+      }
+      .catalyze-close-btn:hover {
+        background-color: #218838;
+      }
+      .catalyze-close-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      .status {
+        margin-top: 15px;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        display: none;
+      }
+      .status.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .status.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .status.loading {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+      .help-text {
+        font-size: 12px;
+        color: #666;
+        margin-top: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="plugin-container">
+      <h2>🚀 Excatop</h2>
+      <form id="excatop-plugin-form">
+        <div class="form-group">
+          <label for="plugin-source-url">Source URL:</label>
+          <input type="url" id="plugin-source-url" name="source-url" placeholder="https://example.com" required>
+          <div class="help-text">Enter the URL to catalyze</div>
+        </div>
+        
+        <div class="button-group">
+          <button type="submit" class="catalyze-btn" id="plugin-catalyze-btn">
+            Insert
+          </button>
+          <button type="button" class="catalyze-close-btn" id="plugin-catalyze-close-btn">
+            Insert & Close
+          </button>
+        </div>
+      </form>
+      
+      <div id="plugin-status" class="status"></div>
+    </div>
+  </body>
+</html>

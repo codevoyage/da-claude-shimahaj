@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,14 @@
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
 
+  /* button colors (extracted from WKND Trendsetters) */
+  --button-text-color: #000;
+  --button-bg-color: transparent;
+  --button-border-color: #000;
+  --button-shadow-color: rgba(244, 254, 139, 0.5);
+  --button-hover-bg: rgba(244, 254, 139, 0.1);
+  --button-focus-color: #000;
+
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
@@ -38,6 +47,7 @@
 
   /* nav height */
   --nav-height: 64px;
+  --header-height: var(--nav-height);
 }
 
 /* fallback fonts */
@@ -165,49 +175,90 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
-a.button:any-link,
-button {
+/* 
+ * Button Styles
+ * Source: https://www.wknd-trendsetters.site/
+ * Extracted: 2025-01-05
+ *
+ * Variants:
+ * - .button (primary) - Yellow shadow accent on hover
+ * - .button.secondary - Border only, no shadow
+ *
+ * States: default, hover, active, focus
+ */
+main .button:any-link,
+main button {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   max-width: 100%;
-  margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  margin: 0;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 1600px;
   font-family: var(--body-font-family);
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 4px 4px 0 0;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s;
 }
 
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
+main .button:hover,
+main .button:focus,
+main button:hover,
+main button:focus {
+  background-color: var(--button-hover-bg);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 7px 7px 0 0;
+  text-decoration: none;
 }
 
-button:disabled,
-button:disabled:hover {
-  background-color: var(--light-color);
-  cursor: unset;
+main .button:active,
+main button:active {
+  background-color: var(--button-hover-bg);
+  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 2px 2px 0 0;
 }
 
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+main .button:focus-visible,
+main button:focus-visible {
+  outline: 2px solid var(--button-focus-color);
+  outline-offset: 2px;
+}
+
+main button:disabled,
+main button:disabled:hover {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+}
+
+/* Secondary button variant - no shadow accent */
+main .button.secondary,
+main button.secondary {
+  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+}
+
+main .button.secondary:hover,
+main .button.secondary:focus,
+main button.secondary:hover,
+main button.secondary:focus {
+  background-color: var(--button-hover-bg);
+  box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 2px inset;
+}
+
+main .button.secondary:active,
+main button.secondary:active {
+  background-color: var(--button-hover-bg);
+  box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 2px inset;
 }
 
 main img {
@@ -254,4 +305,8 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+.section.hidden {
+  display: none;
 }
