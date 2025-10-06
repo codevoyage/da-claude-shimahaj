@@ -1,5 +1,0 @@
-# Mountpoints disabled - using content from GitHub
-# mountpoints:
-#   /:
-#     url: https://content.da.live/codevoyage/da-claude-shimahaj/
-#     type: markup
