@@ -1,3 +1,4 @@
 mountpoints:
   /:
-    url: https://github.com/codevoyage/da-claude-shimahaj/tree/main
+    url: https://content.da.live/codevoyage/da-claude-shimahaj/
+    type: markup
