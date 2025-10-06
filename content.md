@@ -1,3 +1,5 @@
+![Rocket Doctor Logo](/images/hero-logo.png)
+
 # Booking an appointment with a doctor has never been easier
 
 **[See a Doctor](#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE2MDM1IiwidG9nZ2xlIjpmYWxzZX0%3D)**
@@ -73,6 +75,8 @@ Skip the waiting room. Access a range of healthcare services from the comfort of
 +--------------------------------------+--------------------------------------+--------------------------------------+
 | **Columns**                                                                                                             |
 +--------------------------------------+--------------------------------------+--------------------------------------+
+| ![Step 1](/images/step1.webp)        | ![Step 2](/images/step2.webp)        | ![Step 3](/images/step3.webp)        |
+|                                      |                                      |                                      |
 | ### 1                                | ### 2                                | ### 3                                |
 |                                      |                                      |                                      |
 | #### Answer a Few Questions          | #### Schedule an Appointment         | #### See a Doctor                    |
@@ -93,7 +97,7 @@ Skip the waiting room. Access a range of healthcare services from the comfort of
 +--------------------------------------------------------------------------------------------------------------------+
 | **Columns**                                                                                                        |
 +-------------------------------------------------------+------------------------------------------------------------+
-| ### New to Virtual Care?                              |                                                            |
+| ### New to Virtual Care?                              | ![Man using virtual clinic](/images/virtual-clinic.png)   |
 |                                                       |                                                            |
 | Read our guide on virtual healthcare which includes   |                                                            |
 | some tips on how to prepare for your appointment      |                                                            |
@@ -106,6 +110,8 @@ Skip the waiting room. Access a range of healthcare services from the comfort of
 ## Are you looking for a quick, easy and trusted way to connect with a Canadian licensed doctor from the comfort of your own home?
 
 **[See a Doctor](#book)**
+
+![Doctor during online appointment](/images/doctor-appointment.webp)
 
 +--------------------------------------------------------------------------------------------------------------------+
 | **Columns**                                                                                                        |
@@ -150,6 +156,8 @@ Book your virtual appointment with a family doctor or specialist today and exper
 +--------------------------------------------------------------------------------------------------------------------------+
 
 ### Providing Access for Rural and Underserved Communities
+
+![Rural community sign](/images/rural-sign.jpg)
 
 Learn how Rocket Doctor is helping bridge the healthcare gap, particularly for people in rural communities who struggle to access healthcare altogether.
 
@@ -228,6 +236,8 @@ Learn how Rocket Doctor is helping bridge the healthcare gap, particularly for p
 +--------------------------------------------------------------------------------------------------------------------+
 | **Columns**                                                                                                        |
 +-------------------------------------------------------+------------------------------------------------------------+
+| ![Rocket Doctor Logo](/images/rd-logo.png)           | ![Dr. William Cherniak](/images/william-cherniak.png)     |
+|                                                       |                                                            |
 | Rocket doctor is a digital health platform that       | ### Dr. William Cherniak                                   |
 | allows physicians to provide comprehensive care       |                                                            |
 | virtually. Through our efficient and automated        | ER Physician, CEO & Founder of Rocket Doctor               |
