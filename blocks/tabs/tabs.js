@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { toClassName } from '../../scripts/aem.js';
+import { toClassName, createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -49,4 +49,10 @@ export default async function decorate(block) {
   });
 
   block.prepend(tablist);
+
+  // optimize pictures
+  block.querySelectorAll('picture > img').forEach((img) => {
+    const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(newPicture);
+  });
 }

@@ -4,6 +4,7 @@
  * https://www.hlx.live/developer/block-collection/accordion
  */
 
+import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
@@ -22,5 +23,11 @@ export default function decorate(block) {
     details.className = 'accordion-item';
     details.append(summary, body);
     row.replaceWith(details);
+  });
+
+  // optimize pictures
+  block.querySelectorAll('picture > img').forEach((img) => {
+    const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(newPicture);
   });
 }
