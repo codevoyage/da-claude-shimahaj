@@ -12,21 +12,27 @@
  */
 
 :root {
-  /* colors */
+  /* colors - Rocket Doctor Healthcare Brand */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --light-color: #f0f7ff;
+  --dark-color: #1a3a52;
+  --text-color: #2c3e50;
+  --link-color: #0066cc;
+  --link-hover-color: #004999;
 
-  /* button colors (extracted from WKND Trendsetters) */
-  --button-text-color: #000;
-  --button-bg-color: transparent;
-  --button-border-color: #000;
-  --button-shadow-color: rgba(244, 254, 139, 0.5);
-  --button-hover-bg: rgba(244, 254, 139, 0.1);
-  --button-focus-color: #000;
+  /* Healthcare brand colors */
+  --primary-blue: #0066cc;
+  --secondary-teal: #00a7b5;
+  --accent-green: #00c48c;
+  --light-blue-bg: #e8f4f8;
+
+  /* button colors - Healthcare theme */
+  --button-text-color: white;
+  --button-bg-color: #0066cc;
+  --button-border-color: #0066cc;
+  --button-shadow-color: rgba(0, 102, 204, 0.2);
+  --button-hover-bg: #004999;
+  --button-focus-color: #0066cc;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -175,14 +181,12 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 
- * Button Styles
- * Source: https://www.wknd-trendsetters.site/
- * Extracted: 2025-01-05
+/*
+ * Button Styles - Rocket Doctor Healthcare Theme
  *
  * Variants:
- * - .button (primary) - Yellow shadow accent on hover
- * - .button.secondary - Border only, no shadow
+ * - .button (primary) - Solid blue background
+ * - .button.secondary - Outlined style
  *
  * States: default, hover, active, focus
  */
@@ -193,24 +197,23 @@ main button {
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  margin: 0;
-  padding: 16px 24px;
-  border: 0;
-  border-radius: 1600px;
+  margin: 12px 0;
+  padding: 14px 32px;
+  border: 2px solid var(--button-border-color);
+  border-radius: 50px;
   font-family: var(--body-font-family);
   font-size: 16px;
-  font-weight: 400;
-  line-height: 1.2;
+  font-weight: 500;
+  line-height: 1.3;
   text-align: center;
   text-decoration: none;
   color: var(--button-text-color);
   background-color: var(--button-bg-color);
-  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 4px 4px 0 0;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: border-color 0.2s, color 0.2s, background-color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
 }
 
 main .button:hover,
@@ -218,47 +221,58 @@ main .button:focus,
 main button:hover,
 main button:focus {
   background-color: var(--button-hover-bg);
-  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 7px 7px 0 0;
+  border-color: var(--button-hover-bg);
   text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--button-shadow-color);
 }
 
 main .button:active,
 main button:active {
-  background-color: var(--button-hover-bg);
-  box-shadow: var(--button-border-color) 0 0 0 2px inset, var(--button-shadow-color) 2px 2px 0 0;
+  background-color: #003d73;
+  border-color: #003d73;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px var(--button-shadow-color);
 }
 
 main .button:focus-visible,
 main button:focus-visible {
   outline: 2px solid var(--button-focus-color);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 main button:disabled,
 main button:disabled:hover {
   opacity: 0.5;
   cursor: not-allowed;
-  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+  transform: none;
+  box-shadow: none;
+  background-color: #ccc;
+  border-color: #ccc;
 }
 
-/* Secondary button variant - no shadow accent */
+/* Secondary button variant - outlined style */
 main .button.secondary,
 main button.secondary {
-  box-shadow: var(--button-border-color) 0 0 0 2px inset;
+  background-color: transparent;
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
 }
 
 main .button.secondary:hover,
 main .button.secondary:focus,
 main button.secondary:hover,
 main button.secondary:focus {
-  background-color: var(--button-hover-bg);
-  box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 2px inset;
+  background-color: var(--light-blue-bg);
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
 }
 
 main .button.secondary:active,
 main button.secondary:active {
-  background-color: var(--button-hover-bg);
-  box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 2px inset;
+  background-color: #d4e9f7;
+  color: #004999;
+  border-color: #004999;
 }
 
 main img {
