@@ -1,5 +1,5 @@
 .*
-*.md
+# *.md  # Commented out to allow serving markdown files
 karma.config.js
 LICENSE
 package.json
