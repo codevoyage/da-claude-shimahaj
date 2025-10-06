@@ -1,4 +1,4 @@
 mountpoints:
   /:
-    url: https://content.da.live/aemysites/excatop/
+    url: https://content.da.live/codevoyage/da-claude-shimahaj/
     type: markup
