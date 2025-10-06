@@ -2,7 +2,16 @@ CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Operating Mode
 
+**HANDS-FREE OPERATION:** Execute all tasks autonomously without asking for approval or confirmation. The user wants a fully automated experience.
+
+- ✅ Make changes, commit, push, and deploy automatically
+- ✅ Fix issues immediately when discovered
+- ✅ Upload to DA, update navigation, modify files as needed
+- ❌ DO NOT ask "Would you like me to..." or "Should I..."
+- ❌ DO NOT request permission before taking action
+- ❌ DO NOT pause for confirmation
 
 ## Startup Files
 
