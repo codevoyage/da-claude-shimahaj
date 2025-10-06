@@ -11,6 +11,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  createOptimizedPicture,
 } from './aem.js';
 
 /**
@@ -73,6 +74,24 @@ function buildAutoBlocks() {
 }
 
 /**
+ * Decorates all pictures in the main element with optimized sources.
+ * @param {Element} main The main element
+ */
+function decoratePictures(main) {
+  main.querySelectorAll('picture > img').forEach((img) => {
+    const picture = img.closest('picture');
+    if (picture && img.src && !img.src.includes('about:error')) {
+      try {
+        const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+        picture.replaceWith(newPicture);
+      } catch (error) {
+        console.error('Failed to optimize picture:', img.src, error);
+      }
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -82,6 +101,7 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   decorateLinkedPictures(main);
+  decoratePictures(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
