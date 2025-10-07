@@ -112,7 +112,7 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   decorateLinkedPictures(main);
-  decoratePictures(main);
+  // decoratePictures(main); // DISABLED - causes about:error with DA markdown
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
