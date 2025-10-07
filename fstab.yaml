@@ -1,0 +1,4 @@
+mountpoints:
+  /rocketdoctor-ca:
+    url: https://content.da.live/codevoyage/da-claude-shimahaj/rocketdoctor-ca
+    type: markup
