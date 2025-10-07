@@ -324,3 +324,50 @@ main .section.highlight {
 .section.hidden {
   display: none;
 }
+
+/* Rocket Doctor section backgrounds */
+main .section.light-blue {
+  background-color: rgb(156, 227, 252);
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.light-cream {
+  background-color: rgb(255, 248, 244);
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.dark-navy {
+  background-color: rgb(3, 22, 38);
+  color: white;
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.dark-navy h1,
+main .section.dark-navy h2,
+main .section.dark-navy h3,
+main .section.dark-navy p {
+  color: white;
+}
+
+main .section.dark-blue {
+  background-color: rgb(0, 43, 135);
+  color: white;
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.dark-blue h1,
+main .section.dark-blue h2,
+main .section.dark-blue h3,
+main .section.dark-blue p {
+  color: white;
+}
+
+main .section.light-gray {
+  background-color: rgb(248, 248, 248);
+  margin: 0;
+  padding: 40px 0;
+}

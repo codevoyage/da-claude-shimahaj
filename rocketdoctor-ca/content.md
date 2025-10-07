@@ -72,6 +72,12 @@ Skip the waiting room. Access a range of healthcare services from the comfort of
 
 ---
 
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (light-cream)                                           |
++---------------------------------------------------------------+
+
 ## How it Works
 
 +---------------------------------------+---------------------------------------+---------------------------------------+
@@ -87,6 +93,12 @@ Skip the waiting room. Access a range of healthcare services from the comfort of
 
 ---
 
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (light-blue)                                            |
++---------------------------------------------------------------+
+
 ### New to Virtual Care?
 
 Read our guide on virtual healthcare which includes some tips on how to prepare for your appointment
@@ -94,6 +106,12 @@ Read our guide on virtual healthcare which includes some tips on how to prepare 
 #### [Read: A Guide to a Virtual Care](https://rocketdoctor.ca/a-guide-to-virtual-care)
 
 ---
+
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (dark-navy)                                             |
++---------------------------------------------------------------+
 
 ### Are you looking for a quick, easy and trusted way to connect with a Canadian licensed doctor from the comfort own your own home?
 
@@ -107,6 +125,12 @@ Skip the long lines, skip the waiting room at a walk-in clinic. Our virtual clin
 
 ---
 
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (dark-blue)                                             |
++---------------------------------------------------------------+
+
 ## Get matched with the best suited doctor for your healthcare needs
 
 With Rocket Doctor, you can access family doctors emergency doctors or specialists online from anywhere. Online doctors in your province are available to provide you with the medical advice you need. You can get a medical advice, prescriptions, specialist treatment and more from doctors licensed in your province.
@@ -118,6 +142,12 @@ Healthcare providers in Ontario, British Columbia and Alberta are working on our
 Book your virtual appointment with a family doctor or specialist today and experience the convenience and quality of care that virtual care offers.
 
 ---
+
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (light-blue)                                            |
++---------------------------------------------------------------+
 
 ### Providing Access for Rural and Underserved Communities
 
@@ -131,80 +161,53 @@ Learn how Rocket Doctor is helping bridge the healthcare gap, particularly for p
 
 ## Frequently Asked Questions
 
-+---------------------------------------------------------------+
-| **Accordion**                                                 |
-+---------------------------------------------------------------+
-| What is Rocket Doctor and how does it work?                   |
-| Rocket Doctor is a virtual health platform that allows you to |
-| book an online doctor appointment in Canada from the comfort  |
-| of your own home. It works by connecting you with Canadian    |
-| licensed physicians who can provide medical advice, diagnosis,|
-| and treatment through secure video call or text chat (text    |
-| chat is currently available in Ontario only)                  |
-+---------------------------------------------------------------+
-| Where is Rocket Doctor available?                             |
-| Rocket Doctor is available in Ontario, British Columbia, and  |
-| Alberta.                                                      |
-+---------------------------------------------------------------+
-| What should I expect during my appointment?                   |
-| During your appointment, you'll connect with a licensed       |
-| physician via video call or text chat who will review your    |
-| medical history and symptoms, provide a diagnosis, and        |
-| recommend treatment options.                                  |
-+---------------------------------------------------------------+
-| How soon will I be able to schedule an appointment?           |
-| Appointments are typically available within 24-48 hours, with |
-| same-day appointments often available.                        |
-+---------------------------------------------------------------+
-| What types of medical conditions can be treated through Rocket Doctors online appointments? |
-| We can treat a wide range of conditions including minor       |
-| illnesses, chronic disease management, mental health issues,  |
-| prescription refills, and more. For emergencies, please call  |
-| 911.                                                          |
-+---------------------------------------------------------------+
-| Does the doctor review my medical history before an appointment? |
-| Yes, doctors review your medical history and intake           |
-| information before your appointment to provide personalized   |
-| care.                                                         |
-+---------------------------------------------------------------+
-| Are the doctors on Rocket Doctor licensed and qualified to practice in Canada? |
-| Yes, all doctors on Rocket Doctor are fully licensed and      |
-| qualified to practice medicine in Canada.                     |
-+---------------------------------------------------------------+
-| Can I get a prescription through Rocket Doctor's online appointments? |
-| Yes, if appropriate, doctors can prescribe medications during |
-| your virtual appointment. Prescriptions are sent electronically|
-| to your pharmacy of choice.                                   |
-+---------------------------------------------------------------+
-| What if I need to see a specialist?                           |
-| Your doctor can provide referrals to specialists through      |
-| Rocket Doctor or in your local area.                          |
-+---------------------------------------------------------------+
-| What if I require additional testing, such as blood work or imaging? |
-| Your doctor can order lab work or imaging tests which you can |
-| complete at a local facility. Results are sent directly to    |
-| your doctor.                                                  |
-+---------------------------------------------------------------+
-| How much does it cost to use Rocket Doctor?                   |
-| Primary care services may require a fee in some provinces.    |
-| Specialist services are typically covered by provincial health|
-| insurance.                                                    |
-+---------------------------------------------------------------+
-| Can I book an appointment with a specific doctor using Rocket Doctor? |
-| We match you with the best suited doctor based on your needs  |
-| and availability.                                             |
-+---------------------------------------------------------------+
-| What is a Rocket Doctor Virtual Care Station?                 |
-| Virtual Care Stations are physical kiosks equipped with       |
-| medical devices where you can connect with a doctor remotely. |
-+---------------------------------------------------------------+
-| Where are Rocket Doctor Virtual Device Stations located?      |
-| Virtual Care Stations are located in various communities      |
-| across Ontario, British Columbia, and Alberta. Contact us for |
-| specific locations.                                           |
-+---------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| **Accordion**                                                                                                                                                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What is Rocket Doctor and how does it work?                                                                                   | Rocket Doctor is a virtual health platform that allows you to book an online doctor appointment in Canada from the comfort   |
+|                                                                                                                               | of your own home. It works by connecting you with Canadian licensed physicians who can provide medical advice, diagnosis,    |
+|                                                                                                                               | and treatment through secure video call or text chat (text chat is currently available in Ontario only)                      |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Where is Rocket Doctor available?                                                                                             | Rocket Doctor is available in Ontario, British Columbia, and Alberta.                                                         |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What should I expect during my appointment?                                                                                   | During your appointment, you'll connect with a licensed physician via video call or text chat who will review your           |
+|                                                                                                                               | medical history and symptoms, provide a diagnosis, and recommend treatment options.                                           |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| How soon will I be able to schedule an appointment?                                                                           | Appointments are typically available within 24-48 hours, with same-day appointments often available.                          |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What types of medical conditions can be treated through Rocket Doctors online appointments?                                   | We can treat a wide range of conditions including minor illnesses, chronic disease management, mental health issues,          |
+|                                                                                                                               | prescription refills, and more. For emergencies, please call 911.                                                             |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Does the doctor review my medical history before an appointment?                                                              | Yes, doctors review your medical history and intake information before your appointment to provide personalized care.         |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Are the doctors on Rocket Doctor licensed and qualified to practice in Canada?                                                | Yes, all doctors on Rocket Doctor are fully licensed and qualified to practice medicine in Canada.                            |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Can I get a prescription through Rocket Doctor's online appointments?                                                         | Yes, if appropriate, doctors can prescribe medications during your virtual appointment. Prescriptions are sent                |
+|                                                                                                                               | electronically to your pharmacy of choice.                                                                                    |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What if I need to see a specialist?                                                                                           | Your doctor can provide referrals to specialists through Rocket Doctor or in your local area.                                 |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What if I require additional testing, such as blood work or imaging?                                                          | Your doctor can order lab work or imaging tests which you can complete at a local facility. Results are sent directly to      |
+|                                                                                                                               | your doctor.                                                                                                                  |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| How much does it cost to use Rocket Doctor?                                                                                   | Primary care services may require a fee in some provinces. Specialist services are typically covered by provincial health     |
+|                                                                                                                               | insurance.                                                                                                                    |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Can I book an appointment with a specific doctor using Rocket Doctor?                                                         | We match you with the best suited doctor based on your needs and availability.                                                |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| What is a Rocket Doctor Virtual Care Station?                                                                                 | Virtual Care Stations are physical kiosks equipped with medical devices where you can connect with a doctor remotely.         |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Where are Rocket Doctor Virtual Device Stations located?                                                                      | Virtual Care Stations are located in various communities across Ontario, British Columbia, and Alberta. Contact us for        |
+|                                                                                                                               | specific locations.                                                                                                           |
++-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
 
 ---
+
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (light-gray)                                            |
++---------------------------------------------------------------+
 
 ## Our Blog
 
@@ -213,6 +216,12 @@ Learn how Rocket Doctor is helping bridge the healthcare gap, particularly for p
 **[Read More Blog Posts](https://blog.rocketdoctor.ca/)**
 
 ---
+
++---------------------------------------------------------------+
+| **Section Metadata**                                          |
++---------------------------------------------------------------+
+| Style (dark-blue)                                             |
++---------------------------------------------------------------+
 
 ## About Rocket Doctor
 
