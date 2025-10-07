@@ -78,15 +78,26 @@ function buildAutoBlocks() {
  * @param {Element} main The main element
  */
 function decoratePictures(main) {
-  main.querySelectorAll('picture > img').forEach((img) => {
-    const picture = img.closest('picture');
-    if (picture && img.src && !img.src.includes('about:error')) {
-      try {
-        const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-        picture.replaceWith(newPicture);
-      } catch (error) {
-        console.error('Failed to optimize picture:', img.src, error);
-      }
+  main.querySelectorAll('picture').forEach((picture) => {
+    const img = picture.querySelector('img');
+    if (!img) return;
+
+    // Get original src from picture source or img attribute
+    const source = picture.querySelector('source');
+    let originalSrc = source?.getAttribute('srcset') || img.getAttribute('src');
+
+    if (!originalSrc || originalSrc.includes('about:error')) return;
+
+    // Clean up srcset to just get the path
+    if (originalSrc.includes(' ')) {
+      originalSrc = originalSrc.split(' ')[0];
+    }
+
+    try {
+      const newPicture = createOptimizedPicture(originalSrc, img.alt, false, [{ width: '750' }]);
+      picture.replaceWith(newPicture);
+    } catch (error) {
+      console.error('Failed to optimize picture:', originalSrc, error);
     }
   });
 }
