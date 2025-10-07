@@ -2,3 +2,6 @@ mountpoints:
   /rocketdoctor-ca:
     url: https://content.da.live/codevoyage/da-claude-shimahaj/rocketdoctor-ca
     type: markup
+  /juliacodes-com:
+    url: https://content.da.live/codevoyage/da-claude-shimahaj/juliacodes-com
+    type: markup
