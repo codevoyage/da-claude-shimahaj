@@ -1,0 +1,49 @@
+.hero-banner {
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+.hero-banner-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-tagline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.2;
+  color: #351c15;
+}
+
+.hero-content-card {
+  background-color: #f8f8f8;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-theme {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffb500;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.card-headline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #351c15;
+}
+
+@media (max-width: 768px) {
+  .hero-tagline {
+    font-size: 1.8rem;
+  }
+
+  .card-headline {
+    font-size: 1.2rem;
+  }
+}

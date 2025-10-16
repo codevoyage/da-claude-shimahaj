@@ -1,0 +1,33 @@
+{
+  "name": "Corporate Homepage",
+  "description": "Template for UPS corporate storytelling pages",
+  "sections": [
+    {
+      "block": "hero-banner",
+      "required": true,
+      "description": "Main hero with company tagline and featured message"
+    },
+    {
+      "block": "stats-grid",
+      "required": false,
+      "description": "Company statistics and key metrics"
+    },
+    {
+      "block": "content-section",
+      "required": true,
+      "repeatable": true,
+      "description": "Content sections for storytelling (About, Impact, etc.)"
+    }
+  ],
+  "metadata": {
+    "type": "corporate",
+    "navigation": "main",
+    "footer": "corporate"
+  },
+  "useCases": [
+    "About pages",
+    "Company overview pages",
+    "Impact/sustainability pages",
+    "Investor relations pages"
+  ]
+}

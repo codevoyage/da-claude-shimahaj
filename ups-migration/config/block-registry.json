@@ -1,0 +1,48 @@
+{
+  "blocks": {
+    "hero-banner": {
+      "name": "Hero Banner",
+      "description": "Large hero section with tagline and featured content card",
+      "usage": "Homepage heroes, campaign landing pages",
+      "variants": ["default", "centered", "with-background"],
+      "contentStructure": [
+        {"field": "tagline", "type": "text", "required": true},
+        {"field": "theme", "type": "text", "required": false},
+        {"field": "headline", "type": "text", "required": true}
+      ]
+    },
+    "stats-grid": {
+      "name": "Statistics Grid",
+      "description": "Grid layout for displaying key metrics and statistics",
+      "usage": "Company stats, performance metrics, impact numbers",
+      "variants": ["2-column", "3-column", "4-column"],
+      "contentStructure": [
+        {"field": "value", "type": "text", "required": true},
+        {"field": "label", "type": "text", "required": true}
+      ]
+    },
+    "content-section": {
+      "name": "Content Section",
+      "description": "Text content with optional CTA button",
+      "usage": "About sections, value propositions, general content",
+      "variants": ["centered", "left-aligned", "with-image"],
+      "contentStructure": [
+        {"field": "heading", "type": "text", "required": true},
+        {"field": "text", "type": "richtext", "required": true},
+        {"field": "cta", "type": "link", "required": false}
+      ]
+    }
+  },
+  "brandColors": {
+    "primary": "#351c15",
+    "secondary": "#ffb500",
+    "accent": "#e6a300",
+    "background": "#f8f8f8",
+    "text": "#555"
+  },
+  "breakpoints": {
+    "mobile": "768px",
+    "tablet": "1024px",
+    "desktop": "1200px"
+  }
+}
