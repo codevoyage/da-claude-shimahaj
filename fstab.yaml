@@ -5,3 +5,6 @@ mountpoints:
   /juliacodes-com:
     url: https://content.da.live/codevoyage/da-claude-shimahaj/juliacodes-com
     type: markup
+  /ups:
+    url: https://content.da.live/codevoyage/da-claude-shimahaj/ups
+    type: markup
